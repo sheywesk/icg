@@ -11,7 +11,7 @@ bool LoaderOBJ::importModel() {
 	//checar se atquivo existe
 	std::ifstream fin(pfile.c_str());
 	if (!fin.fail()) {
-		fin.close;
+		fin.close();
 	}
 	else {
 		return false;

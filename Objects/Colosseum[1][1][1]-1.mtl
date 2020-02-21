@@ -1,0 +1,248 @@
+# Created using Spin 3D
+
+newmtl stone2
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\stone2.jpg
+
+newmtl stone1
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\stone1.jpg
+
+newmtl stone001
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\stone001.jpg
+
+newmtl roman_gr
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\roman_gr.png
+
+newmtl roman_ea
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\roman_ea.png
+
+newmtl loja_tex
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\loja_tex.jpg
+
+newmtl lattice_
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\lattice_.png
+
+newmtl gold
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\gold.jpg
+
+newmtl baxr_1
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\baxr_1.png
+
+newmtl arch
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\arch.jpg
+
+newmtl _Tile_Ce
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\_Tile_Ce.jpg
+
+newmtl _Stone_V
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\_Stone_V.jpg
+
+newmtl _Stone_P
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\_Stone_P.jpg
+
+newmtl _Stone04
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\_Stone04.jpg
+
+newmtl _Stone03
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\_Stone03.jpg
+
+newmtl _Stone02
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\_Stone02.jpg
+
+newmtl _Stone01
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\_Stone01.jpg
+
+newmtl _Claddin
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\_Claddin.jpg
+
+newmtl _Cladd03
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\_Cladd03.jpg
+
+newmtl _Cladd02
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\_Cladd02.jpg
+
+newmtl _Cladd01
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\_Cladd01.jpg
+
+newmtl _2
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\_2.jpg
+
+newmtl _1
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\_1.jpg
+
+newmtl Wood_Che
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\Wood_Che.jpg
+
+newmtl Stone_Ma
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\Stone_Ma.jpg
+
+newmtl Roofing_
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\Roofing_.jpg
+
+newmtl Ornament
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\Ornament.jpg
+
+newmtl Metal_Ro
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\Metal_Ro.jpg
+
+newmtl MarbleWh
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\MarbleWh.jpg
+
+newmtl Marble01
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\Marble01.jpg
+
+newmtl Groundco
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\Groundco.jpg
+
+newmtl FrontCol
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+
+newmtl Color_A0
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\Color_A0.jpg
+
+newmtl BRIO_PF_
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\BRIO_PF_.jpg
+
+newmtl BRIO_P01
+Ns 0.000
+Ka 0.000 0.000 0.000
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+map_Kd Textures\BRIO_P01.jpg
+
+# Thank you for using Spin 3D
+
