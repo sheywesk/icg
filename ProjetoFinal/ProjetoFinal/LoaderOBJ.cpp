@@ -1,107 +1,204 @@
 #include "LoaderOBJ.h"
-//#include <cstdio>
 
-bool LoaderOBJ::loadOBJ(const char * path,
-	std::vector<glm::vec3> & out_vertices,
-	std::vector<glm::vec2> & out_uvs,
-	std::vector<glm::vec3> & out_normals)
-{
-	// Abre o arquivo
-	//FILE * file = fopen(path, "r");
-	std::ifstream file(path);
+LoaderOBJ::LoaderOBJ(const std::string fileName) {
+	modelpath = fileName;
+}
 
-	// (FILE == NULL)
-	if (!file.is_open()) {
-		printf("Impossible to open the file !\n");
+LoaderOBJ::~LoaderOBJ(){}
+
+bool LoaderOBJ::importModel() {
+	std::string pfile = modelpath;
+	//checar se atquivo existe
+	std::ifstream fin(pfile.c_str());
+	if (!fin.fail()) {
+		fin.close;
+	}
+	else {
 		return false;
 	}
 
-	while (1) {
+	scene = importer.ReadFile(pfile, aiProcessPreset_TargetRealtime_Quality);
 
-		std::string line;
-		// read the first word of the line
-		int res = file.get();
-		//Substitui o int res = fscanf(file, "%s", lineHeader);
-		if (res == EOF)
-			break; // EOF = End Of File. Quit the loop.
+	// caso importer falhe
+	if (!scene) {
+		return false;
+	}
 
-		getline(file, line);
+	return true;
+}
 
-		if (line.compare(1, 1, "v") == 0) {
-			glm::vec3 vertex;
-			fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
+void LoaderOBJ::Color4f(const aiColor4D *color) {
+	glColor4f(color->r, color->g, color->b, color->a);
+}
 
-			/*    TESTES:
-			char v1 = vertex.x;
-			file.read(&v1, sizeof(float));
-			char v2 = vertex.y;
-			file.read(&v2, sizeof(float));
-			char v3 = vertex.z;
-			file.read(&v3, sizeof(float));*/
+void LoaderOBJ::set_float4(float f[4], float a, float b, float c, float d) {
+	f[0] = a;
+	f[1] = b;
+	f[2] = c;
+	f[3] = d;
+}
 
-			temp_vertices.push_back(vertex);
+void LoaderOBJ::color4_to_float4(const aiColor4D *c, float f[4]) {
+	f[0] = c->r;
+	f[1] = c->g;
+	f[2] = c->b;
+	f[3] = c->a;
+}
+
+void LoaderOBJ::apply_material(const aiMaterial *mtl) {
+	float c[4];
+
+	GLenum fill_mode;
+	int ret1, ret2;
+
+	aiColor4D diffuse;
+	aiColor4D specular;
+	aiColor4D ambient;
+	aiColor4D emission;
+	
+	float shininess, strength;
+	int two_sided;
+	int wireframe;
+	unsigned int max;
+
+	int texIndex = 0;
+	aiString texPath;
+
+	if (AI_SUCCESS == mtl->GetTexture(aiTextureType_DIFFUSE, texIndex, &texPath)) {
+		unsigned int texId = *textureIdMap[texPath.data];
+		glBindTexture(GL_TEXTURE_2D, texId);
+	}
+
+	set_float4(c, 0.8f, 0.8f, 0.8f, 1.0f);
+	if (AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_DIFFUSE, &diffuse)) {
+		color4_to_float4(&diffuse, c);
+	}
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, c);
+
+	set_float4(c, 0.0f, 0.0f, 0.0f, 1.0f);
+	if (AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_SPECULAR, &specular)) {
+		color4_to_float4(&specular, c);
+	}
+
+	set_float4(c, 0.2f, 0.2f, 0.2f, 1.0f);
+	if (AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_AMBIENT, &ambient)) {
+		color4_to_float4(&ambient, c);
+	}
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, c);
+
+	set_float4(c, 0.0f, 0.0f, 0.0f, 1.0f);
+	if (AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_EMISSIVE, &emission)) {
+		color4_to_float4(&emission, c);
+	}
+	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, c);
+
+
+	max = 1;
+	ret1 = aiGetMaterialFloatArray(mtl, AI_MATKEY_SHININESS, &shininess, &max);
+	max = 1;
+	ret2 = aiGetMaterialFloatArray(mtl, AI_MATKEY_SHININESS_STRENGTH, &strength, &max);
+	if ((ret1 == AI_SUCCESS) && (ret2 == AI_SUCCESS)) {
+		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess*strength);
+	}
+	else {
+		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.0f);
+		set_float4(c, 0.0f, 0.0f, 0.0f, 0.0f);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, c);
+	}
+
+	max = 1;
+	if (AI_SUCCESS == aiGetMaterialIntegerArray(mtl, AI_MATKEY_ENABLE_WIREFRAME, &wireframe, &max)) {
+		fill_mode = wireframe ? GL_LINE : GL_FILL;
+	}
+	else {
+		fill_mode = GL_FILL;
+	}
+	glPolygonMode(GL_FRONT_AND_BACK, fill_mode);
+
+	max = 1;
+	if ((AI_SUCCESS == aiGetMaterialIntegerArray(mtl, AI_MATKEY_TWOSIDED, &two_sided, &max)) && two_sided) {
+		glEnable(GL_CULL_FACE);
+	}
+	else {
+		glDisable(GL_CULL_FACE);
+	}
+}
+
+void LoaderOBJ::recursive_render(const struct aiScene *sc, const struct aiNode *nd, float scale) {
+	unsigned int i , t;
+	unsigned int n = 0;
+	aiMatrix4x4 m = nd->mTransformation;
+
+	aiMatrix4x4 m2;
+	aiMatrix4x4::Scaling(aiVector3D(scale, scale, scale), m2);
+	m = m * m2;
+
+	m.Transpose();
+	glPushMatrix();
+	glMultMatrixf((float*)&m);
+
+	for (; n < nd->mNumMeshes; ++n) {
+		const struct aiMesh* mesh = scene->mMeshes[nd->mMeshes[n]];
+
+		apply_material(sc->mMaterials[mesh->mMaterialIndex]);
+
+		if (mesh->mNormals == NULL)
+		{
+			glDisable(GL_LIGHTING);
 		}
-		else if (line.compare(1, 2, "vt") == 0) {
-			glm::vec2 uv;
-			fscanf(file, "%f %f\n", &uv.x, &uv.y);
-			/*		TESTES:
-			char uv1 = uv.x;
-			file.read(&uv1, sizeof(float));
-			char uv2 = uv.y;
-			file.read(&uv2, sizeof(float));*/
-
-			temp_uvs.push_back(uv);
+		else
+		{
+			glEnable(GL_LIGHTING);
 		}
-		else if (line.compare(1, 2, "vn") == 0) {
-			glm::vec3 normal;
-			fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
-			/*		TESTES:
-			char normal1 = normal.x;
-			file.read(&normal1, sizeof(float));
-			char normal2 = normal.y;
-			file.read(&normal2, sizeof(float));
-			char normal3 = normal.z;
-			file.read(&normal3, sizeof(float));*/
 
-			temp_normals.push_back(normal);
+		if (mesh->mColors[0] != NULL)
+		{
+			glEnable(GL_COLOR_MATERIAL);
 		}
-		else if (line.compare(1, 1, "f") == 0) {
-			std::string vertex1, vertex2, vertex3;
-			unsigned int vertexIndex[3], uvIndex[3], normalIndex[3];
-			int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2]);
+		else
+		{
+			glDisable(GL_COLOR_MATERIAL);
+		}
 
-			if (matches != 9) {
-				printf("File can't be read by our simple parser : ( Try exporting with other options\n");
-				return false;
+		for (t = 0; t < mesh->mNumFaces; ++t) {
+			const struct aiFace* face = &mesh->mFaces[t];
+			GLenum face_mode;
+
+			switch (face->mNumIndices){
+			case 1: face_mode = GL_POINTS; break;
+			case 2: face_mode = GL_LINES; break;
+			case 3: face_mode = GL_TRIANGLES; break;
+			default: face_mode = GL_POLYGON; break;
 			}
-			vertexIndices.push_back(vertexIndex[0]);
-			vertexIndices.push_back(vertexIndex[1]);
-			vertexIndices.push_back(vertexIndex[2]);
-			uvIndices.push_back(uvIndex[0]);
-			uvIndices.push_back(uvIndex[1]);
-			uvIndices.push_back(uvIndex[2]);
-			normalIndices.push_back(normalIndex[0]);
-			normalIndices.push_back(normalIndex[1]);
-			normalIndices.push_back(normalIndex[2]);
+
+			glBegin(face_mode);
+
+			for (i = 0; i < face->mNumIndices; i++){
+				int vertexIndex = face->mIndices[i];	
+				if (mesh->mColors[0] != NULL)
+					Color4f(&mesh->mColors[0][vertexIndex]);
+				if (mesh->mNormals != NULL)
+
+					if (mesh->HasTextureCoords(0)){
+						glTexCoord2f(mesh->mTextureCoords[0][vertexIndex].x, 1 - mesh->mTextureCoords[0][vertexIndex].y);
+					}
+
+				glNormal3fv(&mesh->mNormals[vertexIndex].x);
+				glVertex3fv(&mesh->mVertices[vertexIndex].x);
+			}
+			glEnd();
 		}
 	}
 
-	// For each vertex of each triangle
-	for (unsigned int i = 0; i < vertexIndices.size(); i++) {
-		unsigned int vertexIndex = vertexIndices[i];
-		glm::vec3 vertex = temp_vertices[vertexIndex - 1];
-		out_vertices.push_back(vertex);
+	for (n = 0; n < nd->mNumChildren; ++n){
+		recursive_render(sc, nd->mChildren[n], scale);
 	}
 
-	for (unsigned int i = 0; i < uvIndices.size(); i++) {
-		unsigned int uvIndex = uvIndices[i];
-		glm::vec2 uv = temp_uvs[uvIndex - 1];
-		out_uvs.push_back(uv);
-	}
+	glPopMatrix();
+}
 
-	for (unsigned int i = 0; i < normalIndices.size(); i++) {
-		unsigned int normalIndex = normalIndices[i];
-		glm::vec3 normal = temp_normals[normalIndex - 1];
-		out_normals.push_back(normal);
-	}
+void LoaderOBJ::renderTheModel() {
+	glEnable(GL_TEXTURE_2D);
+	recursive_render(scene, scene->mRootNode, 0.35);
+	glDisable(GL_TEXTURE_2D);
 }
