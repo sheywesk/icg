@@ -4,17 +4,12 @@
 #include <vector>
 #include <fstream>
 #include <stdlib.h>
-#include <gl/glew.h>
-#include <GL/freeglut.h>
 
-#include <glm.hpp>
-#include <vec2.hpp>
-#include <vec3.hpp>
-#include <vec4.hpp>
 
-#include <assimp\Importer.hpp>
-#include <assimp\scene.h>
-#include <assimp\postprocess.h>
-#include <SOIL2.h>
+#include <glew.h>
+#include <GL/glut.h>
+
+
+
 
 #include "LoaderOBJ.h"

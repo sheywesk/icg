@@ -91,13 +91,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Vanessa\source\repos\sheywesk\icg\libs\glm;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\SOIL2\include;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\GLUT\include;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\GLEW\include;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\MinGW\include\GL;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\glm;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\SOIL2\include;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\GLUT\include;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\GLEW\include;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Vanessa\source\repos\sheywesk\icg\libs\SOIL2\lib;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\GLUT\lib;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\GLEW\lib\Release\Win32;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;soil2.lib;freeglut.lib;glew32.lib;glew32s.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Vanessa\source\repos\sheywesk\icg\libs\glfw-3.3.2.bin.WIN64\lib-vc2017;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\SOIL2\lib;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\GLUT\lib;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\GLEW\lib\Release\Win32;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;soil2.lib;freeglut.lib;glew32.lib;glew32s.lib;assimp-vc140-mt.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -126,15 +126,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Vanessa\source\repos\sheywesk\icg\libs\glm;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\SOIL2\include;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\GLUT\include;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\GLEW\include;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\MinGW\include\GL;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\glm;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\SOIL2\include;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\GLUT\include;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\GLEW\include;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Vanessa\source\repos\sheywesk\icg\libs\SOIL2\lib;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\GLUT\lib;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\GLEW\lib\Release\Win32;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;soil2.lib;freeglut.lib;glew32.lib;glew32s.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Vanessa\source\repos\sheywesk\icg\libs\glfw-3.3.2.bin.WIN64\lib-vc2017;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\SOIL2\lib;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\GLUT\lib;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\GLEW\lib\Release\Win32;C:\Users\Vanessa\source\repos\sheywesk\icg\libs\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;soil2.lib;freeglut.lib;glew32.lib;glew32s.lib;assimp-vc140-mt.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -157,10 +157,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="LoaderOBJ.cpp" />
     <ClCompile Include="ProjetoFinal.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="libs.h" />
     <ClInclude Include="LoaderOBJ.h" />
   </ItemGroup>
